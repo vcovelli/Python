@@ -1,22 +1,26 @@
+Comparison Operators: Used to compare values and return a boolean
+                                                Boolean (True or False)
 x = 10
-y = 20       ## Comparison Operators: Used to compare values and return a boolean
+y = 20       
 
 print(x == y) # False, because 10 is not equal to 20
 print(x != y) # True, because 10 is not equal to 20
 print(x <= y) # True, because 10 is less than or equal to 20
 
-              # Boolean (True or False)
 
+Logical Operators: Used to combine conditional statements
 
 a = True
-b = False     ## Logical Operators: Used to combine conditional statements
+b = False     
 
 print(a and b) # False, because both conditions are not true
 print(a or b)  # True, because one of the conditions is true
 print(not a)   # False, because 'not' reverse the condition
 
 
-age = 18       ## Control Flow Statements: Allows code to make decisions and repeat actions
+Control Flow Statements: Allows code to make decisions and repeat actions
+
+age = 18       
 
 if age < 18:    # The if checks the first condition; if it's false
     print("Minor")
@@ -26,39 +30,99 @@ else:           # else covers any other cases
     print("Adult")        
 
 
-count = 0       ## While Loop:
-while count < 5: # Repeats code as long as condition is true
+While Loop:
+Repeats code as long as condition is true
+
+count = 0       
+while count < 5: 
     print(count)
     count += 1   # This loop will print numbers from 0 to 4, 
                  # as count is incremented each time it reaches 5
 
 
-for i in range(5): ## For Loop:
-    print(i)        # Iterates over a sequence (like a list, tuple, or range)
+For Loop:
+Iterates over a sequence (like a list, tuple, or range)
 
-#The modulus operator (%) gives you the remainder when you divide one number by another. So, i % 2 means "divide i by 2 and give me the remainder."
+for i in range(5): 
+    print(i)        
 
-#Here's how it works in the context of even and odd numbers:
 
-#Even numbers are exactly divisible by 2 (they leave no remainder). So, for even numbers, i % 2 will be 0.
-#Odd numbers leave a remainder of 1 when divided by 2. So, for odd numbers, i % 2 will be 1.
-#In our for loop example, if i % 2 == 0 checks if i is even:
+The modulus operator (%) 
+Gives you the remainder when you divide one number by another. 
+So, i % 2 means "divide i by 2 and give me the remainder."
 
-#If i % 2 is 0, i is even, so we print it.
-#If i % 2 is 1, i is odd, and we skip the print statement.
+Here's how it works in the context of even and odd numbers:
 
-### File Handling
+Even numbers are exactly divisible by 2 (they leave no remainder). So, for even numbers, i % 2 will be 0.
+Odd numbers leave a remainder of 1 when divided by 2. So, for odd numbers, i % 2 will be 1.
+In our for loop example, if i % 2 == 0 checks if i is even:
+
+If i % 2 is 0, i is even, so we print it.
+If i % 2 is 1, i is odd, and we skip the print statement.
+
+
+File Handling
 
 with open('your_file.txt', 'r') as file:  # Open the file in read mode
     lines = file.readlines()  # Read all lines into a list
     line_count = len(lines)  # Get the number of lines
     print("Number of lines:", line_count)  # Print the result
 
-## Opening a File: Use open(filename, mode) to open a file. Common modes are:
+1. Opening a File: Use open(filename, mode) to open a file. Common modes are:
 
-#'r' for reading (default mode).
-#'w' for writing (overwrites the file if it exists, creates a new one if it doesn’t).
-#'a' for appending (adds to the file without overwriting).
+'r' for reading (default mode).
+'w' for writing (overwrites the file if it exists, creates a new one if it doesn’t).
+'a' for appending (adds to the file without overwriting).
 
-## Closing a File: Always close a file after you’re done with it by using file.close() 
+2. Closing a File: Always close a file after you’re done with it by using file.close() 
     # or, better yet, using a with statement that automatically closes the file.
+
+
+String Format Time    
+
+%Y - Year with century (e.g., 2024)
+%m - Month as a zero-padded decimal (e.g., 01 for January)
+%d - Day of the month as a zero-padded decimal (e.g., 07)
+%H - Hour (24-hour clock) as a zero-padded decimal (e.g., 14 for 2 PM)
+%M - Minute as a zero-padded decimal (e.g., 05)
+%S - Second as a zero-padded decimal (e.g., 09)
+
+
+Data Manipulation w Pandas:
+
+1. Loading Data
+pd.read_csv("filename.csv"): Loads a CSV file into a Pandas DataFrame.
+df.head(): Displays the first few rows of the DataFrame.
+df.tail(): Displays the last few rows of the DataFrame.
+
+2. Inspecting Data
+df.info(): Provides a summary of the DataFrame, including column data types and non-null counts.
+df.describe(): Generates descriptive statistics for numeric columns (mean, median, min, max, etc.).
+df.columns: Lists all column names in the DataFrame.
+df.shape: Returns the number of rows and columns in the DataFrame (rows, columns).
+
+3. Selecting Columns and Rows
+df["column_name"]: Selects a single column as a Series.
+df[["col1", "col2"]]: Selects multiple columns as a DataFrame.
+df.loc[row_index]: Selects rows by index.
+df.iloc[row_index]: Selects rows by integer location.
+
+4. Filtering Data
+df[df["column_name"] > value]: Filters rows where a column value is greater than a specific value.
+df[(df["col1"] > value1) & (df["col2"] < value2)]: Filters rows with multiple conditions.
+df["column_name"].unique(): Lists unique values in a column.
+df["column_name"].nunique(): Counts unique values in a column.
+
+5. Modifying Data
+df["new_column"] = df["col1"] + df["col2"]: Adds a new column based on operations between existing columns.
+df.drop(columns=["col1", "col2"]): Drops specified columns from the DataFrame.
+df.rename(columns={"old_name": "new_name"}): Renames columns.
+
+6. Aggregating Data
+df["column_name"].sum(): Sums all values in a column.
+df["column_name"].mean(): Calculates the mean of values in a column.
+df["column_name"].value_counts(): Counts the occurrences of each unique value in a column.
+df.groupby("column_name").sum(): Groups data by a column and calculates the sum for each group.
+
+7. Exporting Data
+df.to_csv("new_file.csv", index=False): Exports the DataFrame to a new CSV file without row indices.
