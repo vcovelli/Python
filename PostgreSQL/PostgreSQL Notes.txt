@@ -1,0 +1,122 @@
+**Connect to PostgreSQL Interactive Terminal:**
+
+psql -U postgres
+
+
+**Create a Database:**
+
+CREATE DATABASE test_db;
+
+
+**Switch Database:**
+
+\c test_db
+
+
+**Create a Table:**
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    department VARCHAR(50),
+    salary NUMERIC(10, 2)
+);
+
+
+**Insert Data into a Table**
+
+INSERT INTO employees (name, age, department, salary)
+VALUES 
+    ('Alice Johnson', 30, 'Marketing', 55000.00),
+    ('Bob Smith', 24, 'Sales', 45000.00),
+    ('Carol Williams', 40, 'Engineering', 75000.00),
+    ('David Brown', 35, 'Human Resources', 62000.00);
+
+
+**Query the Table**
+
+SELECT * FROM employees;
+
+
+**Basic Queries**
+
+--Select specific columns--
+SELECT name, department FROM employees;
+
+--Filter rows--
+SELECT * FROM employees WHERE age > 30;
+
+--Calculate an average--
+SELECT AVG(salary) FROM employees;
+
+--Updating Data--
+UPDATE employees
+SET salary = 58000.00
+WHERE name = 'Alice Johnson';
+
+--Deleting Data--
+DELETE FROM employees
+WHERE name = 'Bob Smith';
+
+
+**Advanced Queries**
+
+--Filtering with Multiple Conditions--
+SELECT * FROM employees
+WHERE age > 30 AND department = 'Engineering';
+
+--Sorting Results--
+SELECT * FROM employees
+ORDER BY salary DESC;
+
+--Using Aggregate Functions--
+SELECT SUM(salary) AS total_payroll FROM employees;
+
+
+**Grouping and Aggregating Data**
+
+--Group By--
+SELECT department, AVG(salary) AS average_salary
+FROM employees
+GROUP BY department;
+
+--Using HAVING--
+SELECT department, AVG(salary) AS average_salary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 60000;
+
+
+**Creating Relationships Between Tables**
+
+1. Create a 'projects' Table:
+CREATE TABLE projects (
+    project_id SERIAL PRIMARY KEY,
+    project_name VARCHAR(100),
+    start_date DATE,
+    end_date DATE,
+    department VARCHAR(50)
+);
+
+2. Insert Data into 'projects'
+INSERT INTO projects (project_name, start_date, end_date, department)
+VALUES
+    ('Marketing Campaign', '2024-01-15', '2024-03-15', 'Marketing'),
+    ('New Product Development', '2024-02-01', '2024-06-30', 'Engineering'),
+    ('Employee Onboarding', '2024-03-01', '2024-04-15', 'Human Resources');
+
+3. Join the Tables
+SELECT e.name AS employee_name, e.department, p.project_name
+FROM employees e
+JOIN projects p ON e.department = p.department;
+
+
+**Backing Up and Restoring Data**
+
+--Backing Up a Database--
+pg_dump -U postgres test_db > test_db_backup.sql
+
+--Restoring a Database--
+psql -U postgres -d test_db -f test_db_backup.sql
+
