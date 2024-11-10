@@ -1,14 +1,20 @@
-Comparison Operators: Used to compare values and return a boolean
-                                                Boolean (True or False)
-x = 10
-y = 20       
+**Comparison Operators:
+
+-Used to compare values and return a boolean
+
+Boolean (True or False)
+
+    x = 10
+    y = 20       
 
 print(x == y) # False, because 10 is not equal to 20
 print(x != y) # True, because 10 is not equal to 20
 print(x <= y) # True, because 10 is less than or equal to 20
 
 
-Logical Operators: Used to combine conditional statements
+**Logical Operators: 
+
+-Used to combine conditional statements
 
 a = True
 b = False     
@@ -18,7 +24,9 @@ print(a or b)  # True, because one of the conditions is true
 print(not a)   # False, because 'not' reverse the condition
 
 
-Control Flow Statements: Allows code to make decisions and repeat actions
+**Control Flow Statements: 
+
+-Allows code to make decisions and repeat actions
 
 age = 18       
 
@@ -30,7 +38,8 @@ else:           # else covers any other cases
     print("Adult")        
 
 
-While Loop:
+**While Loop:
+
 Repeats code as long as condition is true
 
 count = 0       
@@ -40,14 +49,16 @@ while count < 5:
                  # as count is incremented each time it reaches 5
 
 
-For Loop:
+**For Loop:
+
 Iterates over a sequence (like a list, tuple, or range)
 
 for i in range(5): 
     print(i)        
 
 
-The modulus operator (%) 
+**The modulus operator (%) 
+
 Gives you the remainder when you divide one number by another. 
 So, i % 2 means "divide i by 2 and give me the remainder."
 
@@ -61,7 +72,7 @@ If i % 2 is 0, i is even, so we print it.
 If i % 2 is 1, i is odd, and we skip the print statement.
 
 
-File Handling
+**File Handling
 
 with open('your_file.txt', 'r') as file:  # Open the file in read mode
     lines = file.readlines()  # Read all lines into a list
@@ -78,7 +89,7 @@ with open('your_file.txt', 'r') as file:  # Open the file in read mode
     # or, better yet, using a with statement that automatically closes the file.
 
 
-String Format Time    
+**String Format Time    
 
 %Y - Year with century (e.g., 2024)
 %m - Month as a zero-padded decimal (e.g., 01 for January)
@@ -88,41 +99,69 @@ String Format Time
 %S - Second as a zero-padded decimal (e.g., 09)
 
 
-Data Manipulation w Pandas:
+**Data Manipulation w Pandas:
 
 1. Loading Data
-pd.read_csv("filename.csv"): Loads a CSV file into a Pandas DataFrame.
-df.head(): Displays the first few rows of the DataFrame.
-df.tail(): Displays the last few rows of the DataFrame.
+    pd.read_csv("filename.csv"): Loads a CSV file into a Pandas DataFrame.
+    df.head(): Displays the first few rows of the DataFrame.
+    df.tail(): Displays the last few rows of the DataFrame.
 
 2. Inspecting Data
-df.info(): Provides a summary of the DataFrame, including column data types and non-null counts.
-df.describe(): Generates descriptive statistics for numeric columns (mean, median, min, max, etc.).
-df.columns: Lists all column names in the DataFrame.
-df.shape: Returns the number of rows and columns in the DataFrame (rows, columns).
+    df.info(): Provides a summary of the DataFrame, including column data types and non-null counts.
+    df.describe(): Generates descriptive statistics for numeric columns (mean, median, min, max, etc.).
+    df.columns: Lists all column names in the DataFrame.
+    df.shape: Returns the number of rows and columns in the DataFrame (rows, columns).
 
 3. Selecting Columns and Rows
-df["column_name"]: Selects a single column as a Series.
-df[["col1", "col2"]]: Selects multiple columns as a DataFrame.
-df.loc[row_index]: Selects rows by index.
-df.iloc[row_index]: Selects rows by integer location.
+    df["column_name"]: Selects a single column as a Series.
+    df[["col1", "col2"]]: Selects multiple columns as a DataFrame.
+    df.loc[row_index]: Selects rows by index.
+    df.iloc[row_index]: Selects rows by integer location.
 
 4. Filtering Data
-df[df["column_name"] > value]: Filters rows where a column value is greater than a specific value.
-df[(df["col1"] > value1) & (df["col2"] < value2)]: Filters rows with multiple conditions.
-df["column_name"].unique(): Lists unique values in a column.
-df["column_name"].nunique(): Counts unique values in a column.
+    df[df["column_name"] > value]: Filters rows where a column value is greater than a specific value.
+    df[(df["col1"] > value1) & (df["col2"] < value2)]: Filters rows with multiple conditions.
+    df["column_name"].unique(): Lists unique values in a column.
+    df["column_name"].nunique(): Counts unique values in a column.
 
 5. Modifying Data
-df["new_column"] = df["col1"] + df["col2"]: Adds a new column based on operations between existing columns.
-df.drop(columns=["col1", "col2"]): Drops specified columns from the DataFrame.
-df.rename(columns={"old_name": "new_name"}): Renames columns.
+    df["new_column"] = df["col1"] + df["col2"]: Adds a new column based on operations between existing columns.
+    df.drop(columns=["col1", "col2"]): Drops specified columns from the DataFrame.
+    df.rename(columns={"old_name": "new_name"}): Renames columns.
 
 6. Aggregating Data
-df["column_name"].sum(): Sums all values in a column.
-df["column_name"].mean(): Calculates the mean of values in a column.
-df["column_name"].value_counts(): Counts the occurrences of each unique value in a column.
-df.groupby("column_name").sum(): Groups data by a column and calculates the sum for each group.
+    df["column_name"].sum(): Sums all values in a column.
+    df["column_name"].mean(): Calculates the mean of values in a column.
+    df["column_name"].value_counts(): Counts the occurrences of each unique value in a column.
+    df.groupby("column_name").sum(): Groups data by a column and calculates the sum for each group.
 
 7. Exporting Data
-df.to_csv("new_file.csv", index=False): Exports the DataFrame to a new CSV file without row indices.
+    df.to_csv("new_file.csv", index=False): Exports the DataFrame to a new CSV file without row indices.
+
+
+**HashSet 
+
+= set in Python (collection of unique values)
+
+    my_set = set()
+    my_set.add(1)
+    my_set.add(2)
+    print(1 in my_set)  # Output: True
+
+-Stores unique values.
+-Allows for operations like membership checking, adding, and removing values.
+-Can perform set operations like union, intersection, and difference.
+
+
+**HashMap
+
+= dict in Python (collection of key-value pairs)
+
+    my_dict = {}
+    my_dict["name"] = "Alice"
+    my_dict["age"] = 30
+    print(my_dict["name"])  # Output: Alice
+
+-Stores key-value pairs.
+-Allows for fast lookups by key, adding new key-value pairs, and updating or removing them.
+-Useful when you need to map one piece of data (the key) to another (the value).
