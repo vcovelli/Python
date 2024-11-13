@@ -165,3 +165,138 @@ with open('your_file.txt', 'r') as file:  # Open the file in read mode
 -Stores key-value pairs.
 -Allows for fast lookups by key, adding new key-value pairs, and updating or removing them.
 -Useful when you need to map one piece of data (the key) to another (the value).
+
+**API
+
+= Application Programming Interface (API)
+
+- A way for software applications to communicate and exchange data.
+- APIs often work over HTTP and use JSON for data exchange.
+
+1. Common HTTP Methods 
+
+-GET: Retrieve data from a server.
+-POST: Send data to a server to create a resource.
+-PUT: Update an existing resource on the server.
+-DELETE: Delete a resource from the server.
+
+2. Making API Calls in Python
+
+"""""""""""""""""""""""""""""""""""""""""""
+import requests
+
+# GET request example
+url = "https://api.example.com/data"
+params = {"key": "value"}
+response = requests.get(url, params=params)
+
+if response.status_code == 200:
+    print(response.json())
+else:
+    print(f"Error: {response.status_code}")
+"""""""""""""""""""""""""""""""""""""""""""
+-Use params for query strings in GET requests.
+-Check response.status_code for HTTP status (e.g., 200 for success).
+-Use response.json() to parse JSON data.
+
+3. Error Handling
+
+Common HTTP Status Codes:
+200 OK: Success.
+401 Unauthorized: Invalid or missing API key.
+403 Forbidden: Access denied.
+404 Not Found: Resource doesn’t exist.
+429 Too Many Requests: Rate limit exceeded.
+500 Internal Server Error: Server issue.
+
+-See "Error_Handling_and_Custom_Exceptions.py" for more-
+
+4. Authentication
+
+-Many APIs require an API Key or Access Token.
+-Store sensitive keys securely (e.g., environment variables).
+
+-See "Auth_and_API_Keys.py" for more-
+
+5. Pagination
+
+-Large datasets are returned in chunks or "pages".
+-Use query parameters like page and per_page to fetch all pages.
+
+6. Rate Limiting
+
+-APIs often limit the number of requests in a time window.
+-Handle 429 Too Many Requests errors with retries.
+
+7. Working with JSON Responses
+
+-APIs typically return data in JSON format, which can be parsed in Python using response.json().
+
+Extracting Specific Fields:
+"""""""""""""""""""""""""""""""""""""""""""
+data = response.json()
+for item in data:
+    print(item['name'])  # Access specific fields
+"""""""""""""""""""""""""""""""""""""""""""
+
+8. Advanced API Features
+
+-Headers
+--Include headers for authentication or content type.
+"""""""""""""""""""""""""""""""""""""""""""
+headers = {"Authorization": "Bearer your_token"}
+response = requests.get(url, headers=headers)
+"""""""""""""""""""""""""""""""""""""""""""
+
+-POST Requests
+--Send data to create a new resource.
+"""""""""""""""""""""""""""""""""""""""""""
+data = {"title": "foo", "body": "bar", "userId": 1}
+response = requests.post(url, json=data)
+print(response.json())
+"""""""""""""""""""""""""""""""""""""""""""
+
+-PUT and DELETE Requests
+--PUT: Update a resource.
+--DELETE: Remove a resource.
+
+9. Storing and Analyzing API Data
+
+-Save Data to a File:
+"""""""""""""""""""""""""""""""""""""""""""
+import json
+
+data = response.json()
+with open("data.json", "w") as file:
+    json.dump(data, file)
+"""""""""""""""""""""""""""""""""""""""""""
+
+-Insert Data into a Database:
+"""""""""""""""""""""""""""""""""""""""""""
+import psycopg2
+
+conn = psycopg2.connect(
+    host="localhost",
+    database="mydb",
+    user="user",
+    password="password"
+)
+cur = conn.cursor()
+
+for item in data:
+    cur.execute(
+        "INSERT INTO table_name (column1, column2) VALUES (%s, %s)",
+        (item['field1'], item['field2'])
+    )
+conn.commit()
+cur.close()
+conn.close()
+"""""""""""""""""""""""""""""""""""""""""""
+
+10. Debugging Tips
+
+-Print Full URL:
+"print(response.url)"
+
+-Check Response Headers:
+"print(response.headers)"
