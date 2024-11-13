@@ -300,3 +300,33 @@ conn.close()
 
 -Check Response Headers:
 "print(response.headers)"
+
+
+**JSON Format
+
+JSON (JavaScript Object Notation) 
+
+-A lightweight data format used to store and exchange data between a client and server. 
+-A universal format for exchanging data, easy for humans to read and write and easy for machines to parse.
+
+JSON consists of:
+
+Key-Value Pairs: Each piece of data is represented as a key:value pair.
+Objects: Enclosed in {} and contain key-value pairs.
+Arrays: Enclosed in [] and hold multiple values.
+
+"""""""""""""""""""""""""""""""""""""""""""
+{
+  "user": {
+    "id": 1,
+    "name": "Alice",
+    "email": "alice@example.com"
+  },
+  "posts": [
+    {"id": 101, "title": "My First Post", "likes": 10},
+    {"id": 102, "title": "Another Post", "likes": 5}
+  ]
+}
+"""""""""""""""""""""""""""""""""""""""""""
+
+-Python can handle JSON data using json.loads (to parse) and json.dumps (to serialize).
