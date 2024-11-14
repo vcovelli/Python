@@ -52,10 +52,10 @@ def fetch_stock_data(tickers):
     try:
         hist = yf.download(tickers, period="1d") # Fetch data for all tickers in one go
         for ticker in tickers:
-            if ticker in hist['Close']:
+            if ticker in hist.columns.levels[1]:
                 stock_data[ticker] = {
-                "close": hist["Close"].iloc[0],
-                "volume": hist["Volume"].iloc[0] if "Volume" in hist.columns else None # Safely handle missing volume
+                    "close": hist["Close"][ticker].iloc[0],
+                    "volume": hist["Volume"][ticker].iloc[0] if "Volume" in hist.columns else None # Safely handle missing volume
             }
     except Exception as e:
         logging.error(f"Error fetching stock data: {e}") # Use Logging for errors 
