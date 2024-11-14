@@ -117,14 +117,26 @@ def main():
             "volume": data["volume"]
         }])], ignore_index=True)
 
+    # Convert "published_at" to datetime for easier analysis and sorting
+    combined_data["published_at"] = pd.to_datetime(combined_data["published_at"], utc=True, format='mixed')
+
     # Reset index for better readability in the combined data
     combined_data = combined_data.reset_index(drop=True) # Removed duplicate indexing for readability
 
     # Rename columns for better presentation
     combined_data.rename(columns={"title": "Title", "published_at": "Published At", "source": "Source"}, inplace=True)
-    
+
+    # Set Pandas options to improve display
+    pd.set_option('display.max_colwidth', None) # Ensure full text in columns is displayed
+    pd.set_option('display.width', 1000) # increase display width to fit more data
+
+    # Print combined data with improved alignment
     print("\nCombined Data")
-    print(combined_data.to_string(index=False)) # Improved readability by removing the index
+    print(combined_data.to_string(index=False, justify='left')) # Improved readability by removing the index
+
+    # Save combined data to CSV file for future use
+    combined_data.to_csv("combined_data.csv", index=False)
+    print("\nCombined data saved to 'combined_data.csv'.")
 
 if __name__ == "__main__":
     main()     
