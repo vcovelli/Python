@@ -33,6 +33,12 @@ VALUES
     ('Carol Williams', 40, 'Engineering', 75000.00),
     ('David Brown', 35, 'Human Resources', 62000.00);
 
+**Navigation**
+
+Use / for PostgreSQL commands like Linux
+
+PostgreSQL doesn't recognize \ in command strings
+
 
 **Query the Table**
 
@@ -119,4 +125,59 @@ pg_dump -U postgres test_db > test_db_backup.sql
 
 --Restoring a Database--
 psql -U postgres -d test_db -f test_db_backup.sql
+
+
+**Window Functions**
+
+Perform calculations across a set of table rows related to the current row without grouping them into a single row. 
+They are ideal for rankings, moving averages, cumulative sums, and more.
+
+Key Components:
+PARTITION BY: Divides rows into groups, like GROUP BY, but doesn't collapse rows.
+ORDER BY: Determines the order of rows within a partition.
+
+Examples: Running Total (Cumulative Sales per Customer)
+--
+SELECT 
+    customer_id,
+    sale_date,
+    sale_amount,
+    SUM(sale_amount) OVER (PARTITION BY customer_id ORDER BY sale_date) AS cumulative_sales
+FROM sales;
+
+SUM(sale_amount) calculates a running total of sales.
+PARTITION BY customer_id restarts the calculation for each customer.
+ORDER BY sale_date ensures the cumulative total is calculated in chronological order.
+
+RANK(): Assigns a rank, skipping numbers for ties.
+ROW_NUMBER(): Assigns a unique row number.
+LAG() and LEAD(): Fetch values from the previous or next row.
+
+Example: Rank Customers by Total Sales
+--
+SELECT 
+    customer_id,
+    SUM(sale_amount) AS total_sales,
+    RANK() OVER (ORDER BY SUM(sale_amount) DESC) AS rank
+FROM sales
+GROUP BY customer_id;
+
+
+**Summary
+
+--Window Functions: Great for rankings and cumulative calculations.
+
+--CTEs: Simplify complex queries.
+
+--Triggers: Automate actions based on table events.
+
+--Query Optimization: Improve performance with indexes and analysis.
+
+--Advanced Reporting: Create detailed analytics.
+
+--Recursive CTEs: Solve hierarchical problems.
+
+--JSON/JSONB: Work with semi-structured data.
+
+--Full-Text Search: Search text data efficiently.
 
